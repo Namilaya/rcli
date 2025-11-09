@@ -66,3 +66,21 @@ pub fn transfer_csv_to_json(opts: &CsvOpts) -> Result<()> {
     serde_json::to_writer(&output_file, &outputs)?;
     Ok(())
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn test_transfer_csv_to_json() {
+        let opts = CsvOpts {
+            input: "assets/juventus.csv".to_string(),
+            output: "output.json".to_string(),
+            delimiter: b',',
+            header: true,
+        };
+
+        let result = transfer_csv_to_json(&opts);
+        assert!(result.is_ok());
+    }
+}
